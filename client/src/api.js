@@ -1,12 +1,27 @@
-const API_URL = '/api/clients';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api/clients';
+
+// Console log to help with debugging
+console.log('Using API URL:', API_URL);
 
 export async function createClient(data) {
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-  return res.json();
+  console.log('Sending data to API:', data);
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.error || 'Failed to register client');
+    }
+    
+    return res.json();
+  } catch (error) {
+    console.error('API Error:', error);
+    throw error;
+  }
 }
 
 export async function getClients() {

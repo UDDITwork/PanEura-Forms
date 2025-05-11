@@ -9,7 +9,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 
 // Navigation component with conditional links based on auth status
 function Navigation() {
-  const { currentUser, logout, isAdmin } = useAuth();
+  const { logout, isAdmin } = useAuth();
 
   return (
     <nav className="app-nav">
