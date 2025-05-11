@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api/clients';
+const API_URL = '/api/clients';
 
 export async function createClient(data) {
   const res = await fetch(API_URL, {
